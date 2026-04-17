@@ -1,0 +1,21 @@
+name: ArgoCD Sync
+
+on:
+  workflow_run:
+    workflows: ["CI/CD Pipeline"]
+    types:
+      - completed
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+    - name: Trigger ArgoCD Sync
+      run: |
+        # This triggers ArgoCD to sync the application
+        # ArgoCD will automatically detect the new image tag
+        echo "ArgoCD will auto-sync the application"
+        echo "New image tag: ghcr.io/${{ github.repository_owner }}/time-learning-app:sha-${{ github.sha }}"
