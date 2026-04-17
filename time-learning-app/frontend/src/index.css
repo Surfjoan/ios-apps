@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --secondary: #f59e0b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --background: #fefce8;
+  --surface: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-5%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+}
+
+.clock-hand {
+  transform-origin: bottom center;
+  transition: transform 0.3s ease-out;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-indigo-500 text-white rounded-xl font-bold
+         shadow-lg shadow-indigo-500/30 hover:bg-indigo-600
+         transform hover:scale-105 transition-all duration-200
+         active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-amber-400 text-gray-900 rounded-xl font-bold
+         shadow-lg shadow-amber-400/30 hover:bg-amber-500
+         transform hover:scale-105 transition-all duration-200
+         active:scale-95;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-xl p-6;
+}
+
+.exercise-card {
+  @apply card cursor-pointer transform transition-all duration-200
+         hover:shadow-2xl hover:scale-102;
+}
+
+.level-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-bold;
+}
+
+.level-easy {
+  @apply bg-green-100 text-green-700;
+}
+
+.level-medium {
+  @apply bg-yellow-100 text-yellow-700;
+}
+
+.level-hard {
+  @apply bg-red-100 text-red-700;
+}
+
+.progress-bar {
+  @apply h-3 bg-gray-200 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-gradient-to-r from-indigo-500 to-purple-500
+         rounded-full transition-all duration-500;
+}
+
+.star {
+  @apply text-2xl;
+}
+
+.star-filled {
+  @apply text-yellow-400;
+}
+
+.star-empty {
+  @apply text-gray-300;
+}
