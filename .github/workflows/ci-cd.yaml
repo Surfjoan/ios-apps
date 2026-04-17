@@ -28,15 +28,11 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: |
-          time-learning-app/frontend/package-lock.json
-          time-learning-app/backend/package-lock.json
+        node-version: '22'
 
     - name: Install frontend dependencies
       working-directory: ./time-learning-app/frontend
-      run: npm ci
+      run: npm install
 
     - name: Build frontend
       working-directory: ./time-learning-app/frontend
@@ -44,7 +40,7 @@ jobs:
 
     - name: Install backend dependencies
       working-directory: ./time-learning-app/backend
-      run: npm ci
+      run: npm install
 
     - name: Build backend
       working-directory: ./time-learning-app/backend
