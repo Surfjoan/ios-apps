@@ -9,8 +9,8 @@ COPY frontend/package*.json ./frontend/
 COPY backend/package*.json ./backend/
 
 # Install dependencies
-RUN cd frontend && npm ci
-RUN cd backend && npm ci
+RUN cd frontend && npm install
+RUN cd backend && npm install
 
 # Copy source code
 COPY frontend/ ./frontend/
@@ -35,7 +35,7 @@ COPY --from=builder /app/backend/dist ./backend/dist
 COPY --from=builder /app/backend/package*.json ./backend/
 
 # Install production dependencies only
-RUN cd backend && npm ci --only=production
+RUN cd backend && npm install --only=production
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
