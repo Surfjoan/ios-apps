@@ -19,6 +19,9 @@ const Learn: React.FC = () => {
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold text-gray-800">Lär dig klockan</h1>
         <p className="text-gray-600">Välj en nivå och börja lära dig!</p>
+        {selectedLevel && (
+          <p className="text-indigo-600 font-semibold">Vald nivå: {selectedLevel}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
