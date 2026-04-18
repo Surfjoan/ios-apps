@@ -91,44 +91,7 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        no-cache: true
 
-  # Deploy to Kubernetes (only on main branch)
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    permissions:
-      contents: read
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup kubectl
-      uses: azure/setup-kubectl@v3
-      with:
-        version: 'v1.28.0'
-
-    - name: Setup kubeconfig
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig.yaml
-        export KUBECONFIG=kubeconfig.yaml
-
-    - name: Update image tag in deployment
-      run: |
-        sed -i "s|image: ghcr.io/.*|image: ghcr.io/${{ github.repository_owner }}/time-learning-app:sha-${{ github.sha }}|g" time-learning-app/k8s/deployment.yaml
-
-    - name: Deploy to Kubernetes
-      run: |
-        export KUBECONFIG=kubeconfig.yaml
-        kubectl apply -f time-learning-app/k8s/deployment.yaml
-        kubectl rollout status deployment/time-learning-app -n time-learning --timeout=300s
-
-    - name: Verify deployment
-      run: |
-        export KUBECONFIG=kubeconfig.yaml
-        kubectl get pods -n time-learning
-        kubectl get svc -n time-learning
-        kubectl get ingress -n time-learning
+  # Note: ArgoCD handles deployment automatically
+  # It will detect the new image and sync the application
