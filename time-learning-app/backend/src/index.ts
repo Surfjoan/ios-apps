@@ -112,6 +112,17 @@ app.get('/api/stats/:userId', (req, res) => {
   })
 })
 
+// Serve static frontend files
+import path from 'path'
+app.use(express.static(path.join(__dirname, '../../frontend/dist')))
+
+// Fallback to index.html for SPA routes
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
