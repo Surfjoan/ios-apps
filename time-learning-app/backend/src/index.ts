@@ -14,7 +14,7 @@ app.use(cors())
 app.use(express.json())
 
 // Database setup
-const db = new Database(':memory:') // Use file database in production
+const db = new Database('./time_learning.db') // Use file database for persistence
 
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -32,6 +32,16 @@ db.serialize(() => {
     completed BOOLEAN,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id)
+  )`)
+  
+  db.run(`CREATE TABLE IF NOT EXISTS exercises (
+    id TEXT PRIMARY KEY,
+    level_id INTEGER,
+    type TEXT,
+    title TEXT,
+    description TEXT,
+    data TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`)
 })
 
@@ -75,6 +85,22 @@ app.get('/api/users/:id/progress', (req, res) => {
   )
 })
 
+// Get exercises
+app.get('/api/exercises', (req, res) => {
+  const { levelId } = req.query
+  
+  db.all('SELECT * FROM exercises WHERE level_id = ? ORDER BY id', 
+    [levelId], 
+    (err, rows) => {
+      if (err) {
+        res.status(500).json({ error: err.message })
+        return
+      }
+      res.json(rows)
+    }
+  )
+})
+
 // Save progress
 app.post('/api/progress', (req, res) => {
   const { user_id, level, stars, completed } = req.body
@@ -108,7 +134,7 @@ app.get('/api/stats/:userId', (req, res) => {
       res.status(500).json({ error: err.message })
       return
     }
-    res.json(row)
+    res.json(row[0])
   })
 })
 
