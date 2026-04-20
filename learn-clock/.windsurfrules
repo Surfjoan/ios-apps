@@ -1,0 +1,46 @@
+# Windsurf Rules — LärDigKlockan
+
+## Project
+- React Native with Expo (SDK 51+), TypeScript strict mode
+- Target platform: iOS (iPhone). Do not add Android-specific workarounds unless asked.
+- Use expo-router for all navigation.
+
+## Code style
+- TypeScript everywhere — no `any` types
+- Functional components with hooks only — no class components
+- Name component files with PascalCase, utilities with camelCase
+- Keep components small and single-responsibility
+- Co-locate types with the file that uses them unless shared across 3+ files
+
+## Styling
+- Use React Native StyleSheet.create() for all styles — no inline style objects
+- No third-party UI libraries unless explicitly requested
+- Design should be child-friendly: large tap targets (min 44pt), readable fonts, soft colors
+
+## State management
+- Local state with useState/useReducer unless explicitly told otherwise
+- No Redux, Zustand or other state libraries in this project
+
+## Geometry & math
+- All clock angle calculations should use radians internally, convert to degrees only for transforms
+- Angles: 0 = 12 o'clock position, clockwise positive
+- Hour hand formula: (hours % 12 + minutes / 60) * 30 degrees
+- Minute hand formula: minutes * 6 degrees
+
+## When implementing gestures
+- Use react-native-gesture-handler (comes with Expo)
+- Wrap the root in GestureHandlerRootView
+- Prefer PanGestureHandler for drag interactions on clock hands
+
+## File structure
+src/
+  app/          (expo-router screens)
+  components/   (reusable UI components)
+  constants/    (colors, fonts, layout constants)
+  utils/        (pure helper functions)
+
+## Do not
+- Do not install packages without explaining why
+- Do not use expo-av, expo-camera or other heavy modules unless asked
+- Do not auto-format Swedish strings — always use the clockHelpers.ts utility
+- Do not use hardcoded colors — always import from constants/colors.ts
