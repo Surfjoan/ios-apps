@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, Timer, RotateCcw, Trophy } from 'lucide-react'
+import { Timer } from 'lucide-react'
 import ClockComponent from '../../components/Clock'
 
 interface Question {
@@ -78,14 +78,7 @@ const QuickTime: React.FC = () => {
     }
   }
 
-  const reset = () => {
-    setSelectedHour(null)
-    setSelectedMinute(null)
-    setShowResult(false)
-    setTimeLeft(30)
-    setGameActive(false)
-  }
-
+  
   const isCorrect = showResult && selectedHour === question.hour && selectedMinute === question.minute
 
   return (

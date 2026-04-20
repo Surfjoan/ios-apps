@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, XCircle, RotateCcw } from 'lucide-react'
-import Clock from '../../components/Clock'
+import ClockComponent from '../../components/Clock'
 
 interface Question {
   id: number
@@ -91,7 +91,7 @@ const WholeHour: React.FC = () => {
             </h2>
             
             <div className="flex justify-center mb-6">
-              <Clock
+              <ClockComponent
                 hour={selectedHour || 12}
                 minute={selectedMinute || 0}
                 interactive={true}
@@ -169,7 +169,7 @@ const WholeHour: React.FC = () => {
             
             {/* Visual representation of target time */}
             <div className="flex justify-center mb-8">
-              <Clock
+              <ClockComponent
                 hour={question.hour}
                 minute={question.minute}
                 interactive={false}

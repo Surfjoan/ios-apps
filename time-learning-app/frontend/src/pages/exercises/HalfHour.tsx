@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle, XCircle, RotateCcw, Clock } from 'lucide-react'
+import { CheckCircle, XCircle, RotateCcw } from 'lucide-react'
 import ClockComponent from '../../components/Clock'
 
 interface Question {

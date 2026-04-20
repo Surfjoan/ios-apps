@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { Clock, Lock, Star, ChevronRight } from 'lucide-react'
-import { useProgress } from '../../hooks/useProgress'
-import { LevelCard } from '../../components/Progress'
+import { useProgress } from '../hooks/useProgress'
+import { LevelCard } from '../components/Progress'
 
 const Learn: React.FC = () => {
   const { progress, loading, getLevelProgress } = useProgress()
-  const [selectedLevel, setSelectedLevel] = useState<number | null>(null)
-
+  
   const levels = [
     { id: 1, name: 'Känn igen klockan', description: 'Lär dig vad en klocka är och dess delar' },
     { id: 2, name: 'Timvisaren', description: 'Förstå den korta visaren' },
@@ -57,7 +55,6 @@ const Learn: React.FC = () => {
                 completed={levelProgress?.completed || false}
                 onClick={() => {
                   if (levelProgress?.unlocked) {
-                    setSelectedLevel(level.id)
                     // Navigate to exercise
                     if (level.id === 1) {
                       window.location.href = '/exercises/introduction'

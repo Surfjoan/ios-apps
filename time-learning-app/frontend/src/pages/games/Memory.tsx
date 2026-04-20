@@ -142,9 +142,8 @@ const Memory: React.FC = () => {
       {/* Game board */}
       <div className="bg-white rounded-2xl shadow-lg p-8">
         <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-          {cards.map((card, index) => {
-            const isSelected = selectedCards.includes(card.id)
-            const isMatch = card.isMatched
+          {cards.map((card) => {
+                        const isMatch = card.isMatched
             
             return (
               <motion.div
