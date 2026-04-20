@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronRight, Volume2 } from 'lucide-react'
+import { ChevronRight, Volume2, ArrowLeft } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import Clock from '../../components/Clock'
 
 interface Part {
@@ -11,6 +12,7 @@ interface Part {
 }
 
 const Introduction: React.FC = () => {
+  const navigate = useNavigate()
   const [selectedPart, setSelectedPart] = useState<string | null>(null)
   const [currentStep, setCurrentStep] = useState(0)
 
@@ -68,12 +70,22 @@ const Introduction: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-gray-800">Lär känna klockan</h1>
-        <p className="text-lg text-gray-600">
-          Steg {currentStep + 1} av {steps.length}
-        </p>
+      {/* Header with back button */}
+      <div className="flex items-center justify-between mb-4">
+        <button
+          onClick={() => navigate('/learn')}
+          className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span>Tillbaka till lärandet</span>
+        </button>
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-800">Lär känna klockan</h1>
+          <p className="text-lg text-gray-600">
+            Steg {currentStep + 1} av {steps.length}
+          </p>
+        </div>
+        <div className="w-32"></div>
       </div>
 
       {/* Main content */}

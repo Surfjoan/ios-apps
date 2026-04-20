@@ -1,16 +1,23 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Clock, CheckCircle } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Clock, CheckCircle, ArrowRight } from 'lucide-react'
 
 const exercises = [
-  { id: 1, name: 'Peka på klockans delar', type: 'identification', difficulty: 'easy' },
-  { id: 2, name: 'Dra visarna till rätt tid', type: 'interactive', difficulty: 'easy' },
-  { id: 3, name: 'Välj rätt klocka', type: 'selection', difficulty: 'medium' },
-  { id: 4, name: 'Läs analog tid', type: 'reading', difficulty: 'medium' },
-  { id: 5, name: 'Digital till analog', type: 'conversion', difficulty: 'hard' },
+  { id: 1, name: 'Peka på klockans delar', type: 'identification', difficulty: 'easy', path: '/exercises/introduction' },
+  { id: 2, name: 'Dra visarna till rätt tid', type: 'interactive', difficulty: 'easy', path: '/exercises/whole-hour' },
+  { id: 3, name: 'Välj rätt klocka', type: 'selection', difficulty: 'medium', path: '/exercises/half-hour' },
+  { id: 4, name: 'Läs analog tid', type: 'reading', difficulty: 'medium', path: '/exercises/analog-digital' },
+  { id: 5, name: 'Digital till analog', type: 'conversion', difficulty: 'hard', path: '/exercises/analog-digital' },
 ]
 
 const Practice: React.FC = () => {
+  const navigate = useNavigate()
+
+  const handleExerciseClick = (path: string) => {
+    navigate(path)
+  }
+
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
@@ -25,7 +32,8 @@ const Practice: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 }}
-            className="exercise-card"
+            className="exercise-card cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => handleExerciseClick(exercise.path)}
           >
             <div className="flex items-center space-x-4">
               <div className="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center">
@@ -40,7 +48,10 @@ const Practice: React.FC = () => {
                   </span>
                 </div>
               </div>
-              <CheckCircle className="w-6 h-6 text-green-500" />
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="w-6 h-6 text-green-500" />
+                <ArrowRight className="w-5 h-5 text-gray-400" />
+              </div>
             </div>
           </motion.div>
         ))}

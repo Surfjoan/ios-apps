@@ -1,9 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../hooks/useProgress'
 import { LevelCard } from '../components/Progress'
 
 const Learn: React.FC = () => {
+  const navigate = useNavigate()
   const { progress, loading, getLevelProgress } = useProgress()
   
   const levels = [
@@ -57,9 +59,17 @@ const Learn: React.FC = () => {
                   if (levelProgress?.unlocked) {
                     // Navigate to exercise
                     if (level.id === 1) {
-                      window.location.href = '/exercises/introduction'
+                      navigate('/exercises/introduction')
+                    } else if (level.id === 2) {
+                      navigate('/exercises/whole-hour')
+                    } else if (level.id === 3) {
+                      navigate('/exercises/half-hour')
                     } else if (level.id === 4) {
-                      window.location.href = '/exercises/whole-hour'
+                      navigate('/exercises/analog-digital')
+                    } else if (level.id === 5) {
+                      navigate('/play/memory')
+                    } else if (level.id === 6) {
+                      navigate('/play/quicktime')
                     }
                   }
                 }}

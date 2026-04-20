@@ -7,6 +7,9 @@ import Practice from './pages/Practice'
 import Play from './pages/Play'
 import ParentDashboard from './pages/ParentDashboard'
 import Layout from './components/Layout'
+import { Introduction, WholeHour, HalfHour, AnalogDigital } from './pages/exercises'
+import { Memory, QuickTime } from './pages/games'
+import NotFound from './pages/NotFound'
 
 const App: React.FC = () => {
   return (
@@ -18,7 +21,14 @@ const App: React.FC = () => {
             <Route path="/learn/:levelId?" element={<Learn />} />
             <Route path="/practice/:exerciseId?" element={<Practice />} />
             <Route path="/play" element={<Play />} />
+            <Route path="/exercises/introduction" element={<Introduction />} />
+            <Route path="/exercises/whole-hour" element={<WholeHour />} />
+            <Route path="/exercises/half-hour" element={<HalfHour />} />
+            <Route path="/exercises/analog-digital" element={<AnalogDigital />} />
+            <Route path="/play/memory" element={<Memory />} />
+            <Route path="/play/quicktime" element={<QuickTime />} />
             <Route path="/parent" element={<ParentDashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
       </Layout>

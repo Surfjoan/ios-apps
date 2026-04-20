@@ -1,0 +1,9 @@
+{
+  "*.{js,jsx,ts,tsx}": [
+    "npm run lint -- --fix",
+    "npm run test -- --passWithNoTests --bail --findRelatedTests"
+  ],
+  "*.{css,scss}": [
+    "npm run lint:css --fix"
+  ]
+}

@@ -96,9 +96,11 @@ const Clock: React.FC<ClockProps> = ({
     >
       <svg
         ref={svgRef}
+        data-testid="clock-svg"
         width={size}
         height={size}
-        className="cursor-pointer"
+        className={`cursor-pointer ${interactive ? 'cursor-grab' : ''}`}
+        viewBox={`0 0 ${size} ${size}`}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
