@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Home from '../../pages/Home'
 import { mockFetch } from '../../mocks/handlers'
+import '@testing-library/jest-dom'
 
 // Mock fetch globally
 global.fetch = jest.fn(mockFetch) as jest.Mock

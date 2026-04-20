@@ -91,7 +91,7 @@ export const mockHandlers = {
 }
 
 // Simple fetch mock for integration tests
-export const mockFetch = (url: string, options?: RequestInit) => {
+export const mockFetch = (url: string) => {
   const handler = Object.values(mockHandlers).find(h => 
     h.url === url || (h.url.includes(':') && url.includes(h.url.split(':')[1]))
   )
