@@ -134,7 +134,7 @@ app.get('/api/stats/:userId', (req, res) => {
       res.status(500).json({ error: err.message })
       return
     }
-    res.json(row[0])
+    res.json(row)
   })
 })
 
